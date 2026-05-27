@@ -2,11 +2,13 @@ import { useState } from 'react'
 
 import './App.css'
 
+const API_URL = 'http://localhost:5001';
+
 function App() {
   const [Data, setData] = useState([])
 
   const handleGetData = async () => {
-    const response = await fetch('http://localhost:5000/getdata');
+    const response = await fetch(`${API_URL}/getdata`);
     const data = await response.json();
     setData(data);
   }
@@ -20,7 +22,7 @@ function App() {
         <button onClick={async () => {
           const name = document.getElementById('name').value;
           const age = document.getElementById('age').value;
-          await fetch('http://localhost:5000/insertdata', {
+          await fetch(`${API_URL}/insertdata`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -49,7 +51,7 @@ function App() {
         <button onClick={async () => {
           const name = document.getElementById('updateName').value;
           const age = document.getElementById('updateAge').value;
-          await fetch(`http://localhost:5000/updateAge/${name}`, {
+          await fetch(`${API_URL}/updateAge/${name}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -65,7 +67,7 @@ function App() {
         <input type="text" id='deleteName' placeholder='Enter name' />
         <button onClick={async () => {
           const name = document.getElementById('deleteName').value;
-          await fetch(`http://localhost:5000/delete/${name}`, {
+          await fetch(`${API_URL}/delete/${name}`, {
             method: 'DELETE'
           })
           alert('User deleted successfully');
